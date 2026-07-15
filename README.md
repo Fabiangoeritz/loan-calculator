@@ -4,6 +4,23 @@ A Python-based loan calculator that generates amortization schedules for loans w
 
 The program calculates monthly interest, regular repayment amounts, remaining balance, and the impact of additional repayments. It also provides optional exports and visualizations.
 
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center">
+      <img src="screenshots/loan_plot.png" width="400">
+      <br>
+      <em>A loan without special repayments. Usually, you pay a lot of interest in the beginning!</em>
+    </td>
+    <td align="center">
+      <img src="screenshots/loan_plot_with_special_repayments.png" width="400">
+      <br>
+      <em>A loan with special repayments. Note how the portion of interest as well as the total interest amount paid is significantly smaller!</em>
+    </td>
+  </tr>
+</table>
+
 ## Features
 
 - Calculate loan repayment schedules based on:
