@@ -3,9 +3,18 @@ from visualization import plot_schedule, save_plot
 from export import save_csv, save_summary
 
 
-def get_special_repayments():
+def get_special_repayments() -> dict[int, float]:
+    """
+    Collect optional special repayments from user input.
 
-    repayments = {}
+    The user enters repayments in the format ``month:amount``.
+    Input is finished by submitting an empty line.
+
+    Returns:
+        A dictionary mapping repayment month to repayment amount.
+    """
+
+    repayments: dict[int, float] = {}
 
     print(
         "Enter special repayments "
@@ -26,7 +35,8 @@ def get_special_repayments():
     return repayments
 
 
-def main():
+def main() -> None:
+    """Run the loan calculator application."""
 
     principal = float(
         input("Loan amount (without currency, e.g: 10000 or 10000.53): ")
