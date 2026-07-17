@@ -8,12 +8,21 @@ import pandas as pd
 
 @dataclass
 class Loan:
+    """
+    Represents an amortizing loan with optional special repayments.
+
+    The class validates its input, calculates the monthly payment,
+    generates an amortization schedule, and provides summary statistics.
+    """
+
     principal: float
     annual_interest_rate: float
     months: int
     special_repayments: Dict[int, float] | None = None
 
     def __post_init__(self) -> None:
+        """Validate input values and initialize optional repayments."""
+
         if self.principal <= 0:
             raise ValueError("Principal must be positive.")
 
@@ -28,10 +37,26 @@ class Loan:
 
     @property
     def monthly_interest_rate(self) -> float:
+        """
+        Return the monthly interest rate as a decimal.
+
+        Returns:
+            The annual interest rate divided by 12.
+        """
+
         return self.annual_interest_rate / 12
 
     @property
     def monthly_payment(self) -> float:
+        """
+        Calculate the fixed monthly payment.
+
+        Returns:
+            The monthly payment using the annuity formula. If the
+            interest rate is zero, the principal is divided equally
+            across all months.
+        """
+
         r = self.monthly_interest_rate
 
         if r == 0:
@@ -44,6 +69,14 @@ class Loan:
         )
 
     def calculate_schedule(self) -> pd.DataFrame:
+        """
+        Generate the loan amortization schedule.
+
+        Returns:
+            A pandas DataFrame containing one row per month with the
+            interest payment, regular repayment, optional special
+            repayment, and remaining balance.
+        """
 
         balance = self.principal
         records = []
@@ -75,7 +108,20 @@ class Loan:
 
         return pd.DataFrame(records)
 
-    def summary(self, schedule: pd.DataFrame) -> dict:
+    def summary(self, schedule: pd.DataFrame) -> dict[str, float | int]:
+        """
+        Calculate summary statistics for the loan.
+
+        Args:
+            schedule:
+                The amortization schedule produced by
+                ``calculate_schedule()``.
+
+        Returns:
+            A dictionary containing the original loan amount, total
+            interest, total repayments, total paid, and months saved
+            through special repayments.
+        """
 
         return {
             "loan_amount": self.principal,
