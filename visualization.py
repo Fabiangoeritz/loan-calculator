@@ -1,7 +1,19 @@
 import matplotlib.pyplot as plt
 import pandas as pd
+from matplotlib.figure import Figure
 
-def create_plot(schedule):
+
+def create_plot(schedule: pd.DataFrame) -> Figure:
+    """
+    Create a bar chart visualizing the loan repayment schedule.
+
+    Args:
+        schedule:
+            The amortization schedule produced by ``Loan.calculate_schedule()``.
+
+    Returns:
+        The Matplotlib figure containing the repayment chart.
+    """
 
     fig, ax = plt.subplots(figsize=(12, 6))
 
@@ -31,13 +43,29 @@ def create_plot(schedule):
     return fig
 
 
-def plot_schedule(schedule):
+def plot_schedule(schedule: pd.DataFrame) -> None:
+    """
+    Display the loan repayment chart.
 
-    fig = create_plot(schedule)
+    Args:
+        schedule:
+            The amortization schedule to visualize.
+    """
+
+    create_plot(schedule)
     plt.show()
 
 
-def save_plot(schedule, filename):
+def save_plot(schedule: pd.DataFrame, filename: str) -> None:
+    """
+    Save the loan repayment chart as an image.
+
+    Args:
+        schedule:
+            The amortization schedule to visualize.
+        filename:
+            Output file path for the saved image.
+    """
 
     fig = create_plot(schedule)
     fig.savefig(
