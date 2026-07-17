@@ -5,6 +5,15 @@ def save_csv(
     schedule: pd.DataFrame,
     filename: str
 ) -> None:
+    """
+    Save the loan amortization schedule as a CSV file.
+
+    Args:
+        schedule:
+            The amortization schedule to save.
+        filename:
+            Output file path.
+    """
 
     schedule.to_csv(
         filename,
@@ -13,9 +22,18 @@ def save_csv(
 
 
 def save_summary(
-    summary: dict,
+    summary: dict[str, float | int],
     filename: str
 ) -> None:
+    """
+    Save the loan summary to a text file.
+
+    Args:
+        summary:
+            A dictionary containing the calculated loan summary.
+        filename:
+            Output file path.
+    """
 
     with open(
         filename,
